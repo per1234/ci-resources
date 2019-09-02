@@ -16,6 +16,7 @@ matrix:
       script:
         - cd "${TRAVIS_BUILD_DIR}/tests"
         - bats check-code-formatting.bats
+        - bats compilation-test.bats
 
 
     - name: 'ShellCheck'
