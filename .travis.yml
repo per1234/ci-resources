@@ -3,6 +3,8 @@ matrix:
     - name: 'Unit Tests'
       language: minimal
       install:
+        # Install bats-core
+        # https://github.com/bats-core/bats-core
         - git clone https://github.com/bats-core/bats-core.git
         - cd bats-core
         # Get new tags from the remote
@@ -19,6 +21,8 @@ matrix:
         - bats compilation-test.bats
 
 
+    # lint shell scripts
+    # https://github.com/koalaman/shellcheck
     - name: 'ShellCheck'
       language: minimal
       script:
@@ -28,6 +32,8 @@ matrix:
     - name: 'Script Formatting Check'
       language: go
       install:
+        # Install shfmt
+        # https://github.com/mvdan/sh
         - go get -u mvdan.cc/sh/cmd/shfmt
       script:
         - shfmt -i 2 -d ${TRAVIS_BUILD_DIR}
