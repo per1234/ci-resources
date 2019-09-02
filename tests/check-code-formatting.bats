@@ -20,9 +20,8 @@
   [ "${#lines[@]}" -eq 12 ]
   outputRegex="^> void foo\(\) \{}$"
   [[ "${lines[4]}" =~ $outputRegex ]]
-  outputRegex="^ERROR: Non-compliant code formatting in \./check-code-formatting/non-compliant/non-compliant\.cpp$"
+  outputRegex="^ERROR: Non-compliant code formatting in \./check-code-formatting/non-compliant/"
   [[ "${lines[5]}" =~ $outputRegex ]]
-  outputRegex="^ERROR: Non-compliant code formatting in \./check-code-formatting/non-compliant/subfolder/non-compliant\.h$"
   [[ "${lines[10]}" =~ $outputRegex ]]
 }
 
