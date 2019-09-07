@@ -12,12 +12,17 @@ source ../compilation-test.sh
   run arduino-cli version
   echo "Exit status: $status | Expected: $expectedExitStatus"
   [ $status -eq $expectedExitStatus ]
+  outputRegex='^arduino-cli Version: 0\.4\.0 Commit: =98b7be9$'
+  [[ "${lines[0]}" =~ $outputRegex ]]
 }
 
 # install latest version of arduino-cli
 @test "installCLI" {
   expectedExitStatus=0
   run installCLI
+  echo "Exit status: $status | Expected: $expectedExitStatus"
+  [ $status -eq $expectedExitStatus ]
+  expectedExitStatus=0
   run arduino-cli version
   echo "Exit status: $status | Expected: $expectedExitStatus"
   [ $status -eq $expectedExitStatus ]
@@ -35,7 +40,7 @@ source ../compilation-test.sh
   [ $status -eq $expectedExitStatus ]
 }
 
-# install MicroCore
+# install 3rd party hardware core
 @test "installBoards 'MicroCore:avr' 'https://mcudude.github.io/MicroCore/package_MCUdude_MicroCore_index.json'" {
   expectedExitStatus=0
   # MicroCore has a dependency on Arduino AVR Boards
