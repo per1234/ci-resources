@@ -39,6 +39,12 @@ Do a manual library installation from the local repository
 - **libraryPath** - The path of the library to install. If not specified, the library will be installed from the root of the repository.
 - **installPath** - The location at which to install the library. If not specified, the library will be installed to the default sketchbook folder (`${HOME}/Arduino/libraries`).
 
+##### `installLibrary libraryIdentifier [branchName [installPath]]`
+Do a manual library installation by cloning from a remote repository
+- **libraryIdentifier** - The URL of the remote repository.
+- **branchName** - The branch, tag, or commit to checkout. If not specified, the latest tag will be checked out.
+- **installPath** - The location at which to install the library. If not specified, the library will be installed to the default sketchbook folder (`${HOME}/Arduino/libraries`).
+
 ##### `buildExampleSketch sketch board [sketchPath]`
 Compile a sketch.
 - **sketch** - Sketch name (e.g., Blink).

@@ -71,6 +71,59 @@ source ../compilation-test.sh
   [[ "${lines[0]}" =~ $outputRegex ]]
 }
 
+# install a library from this repository to a custom location
+@test "installLibrary \"\${PWD}/compilation-test/TestLibrary\" \"${HOME}/Arduino/libraries/TestLibraryCustom\"" {
+  expectedExitStatus=0
+  run installLibrary "${PWD}/compilation-test/TestLibrary" "${HOME}/Arduino/libraries/TestLibraryCustom"
+  echo "Exit status: $status | Expected: $expectedExitStatus"
+  [ $status -eq $expectedExitStatus ]
+  expectedExitStatus=0
+  run arduino-cli compile --fqbn arduino:samd:mkrzero "${HOME}/Arduino/libraries/TestLibraryCustom/examples/TestLibraryExample"
+  echo "Exit status: $status | Expected: $expectedExitStatus"
+  [ $status -eq $expectedExitStatus ]
+}
+
+# install a library from a remote repository
+@test "installLibrary 'https://github.com/arduino-libraries/Stepper'" {
+  expectedExitStatus=0
+  run installLibrary 'https://github.com/arduino-libraries/Stepper'
+  echo "Exit status: $status | Expected: $expectedExitStatus"
+  [ $status -eq $expectedExitStatus ]
+  expectedExitStatus=0
+  run arduino-cli compile --fqbn arduino:samd:mkrzero "${HOME}/Arduino/libraries/Stepper/examples/stepper_oneRevolution"
+  echo "Exit status: $status | Expected: $expectedExitStatus"
+  [ $status -eq $expectedExitStatus ]
+}
+
+# install a library from a remote repository, checking out a previous tag
+@test "installLibrary 'https://github.com/arduino-libraries/Ethernet' '1.1.2'" {
+  expectedExitStatus=0
+  run installLibrary 'https://github.com/arduino-libraries/Ethernet' '1.1.2'
+  echo "Exit status: $status | Expected: $expectedExitStatus"
+  [ $status -eq $expectedExitStatus ]
+  expectedExitStatus=0
+  run arduino-cli compile --fqbn arduino:samd:mkrzero "${HOME}/Arduino/libraries/Ethernet/examples/ChatServer"
+  echo "Exit status: $status | Expected: $expectedExitStatus"
+  [ $status -eq $expectedExitStatus ]
+  expectedExitStatus=1
+  # the LinkStatus example was added in version 2.0.0
+  run arduino-cli compile --fqbn arduino:samd:mkrzero "${HOME}/Arduino/libraries/Ethernet/examples/LinkStatus"
+  echo "Exit status: $status | Expected: $expectedExitStatus"
+  [ $status -eq $expectedExitStatus ]
+}
+
+# install a library from a remote repository, checking out the latest tag, installing to custom location
+@test "installLibrary 'https://github.com/arduino-libraries/Servo' 'latest' \"${HOME}/Arduino/libraries/ServoCustom\"" {
+  expectedExitStatus=0
+  run installLibrary 'https://github.com/arduino-libraries/Servo' 'latest' "${HOME}/Arduino/libraries/ServoCustom"
+  echo "Exit status: $status | Expected: $expectedExitStatus"
+  [ $status -eq $expectedExitStatus ]
+  expectedExitStatus=0
+  run arduino-cli compile --fqbn arduino:samd:mkrzero "${HOME}/Arduino/libraries/ServoCustom/examples/Sweep"
+  echo "Exit status: $status | Expected: $expectedExitStatus"
+  [ $status -eq $expectedExitStatus ]
+}
+
 # build an example sketch that compiles
 @test "buildExampleSketch 'Compiles1' 'arduino:samd:mkrzero' './compilation-test/all-compile'" {
   expectedExitStatus=0
