@@ -49,8 +49,8 @@ source ../compilation-test.sh
   [ $status -eq $expectedExitStatus ]
 }
 
-# install a library from the repository
-@test "installLibrary \"\${PWD}/compilation-test/TestLibrary\"'" {
+# install a library from this repository
+@test "installLibrary \"\${PWD}/compilation-test/TestLibrary\"" {
   expectedExitStatus=0
   run installLibrary "${PWD}/compilation-test/TestLibrary"
   echo "Exit status: $status | Expected: $expectedExitStatus"
@@ -61,8 +61,8 @@ source ../compilation-test.sh
   [ $status -eq $expectedExitStatus ]
 }
 
-# install a library from a non-existent folder
-@test "installLibrary '${PWD}/doesnt-exist'" {
+# install a library from a non-existent folder of this repository
+@test "installLibrary \"${PWD}/doesnt-exist\"" {
   expectedExitStatus=1
   run installLibrary "${PWD}/doesnt-exist"
   echo "Exit status: $status | Expected: $expectedExitStatus"
