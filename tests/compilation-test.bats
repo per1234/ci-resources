@@ -8,6 +8,7 @@ source ../compilation-test.sh
   run installCLI '0.4.0'
   echo "Exit status: $status | Expected: $expectedExitStatus"
   [ $status -eq $expectedExitStatus ]
+  expectedExitStatus=0
   run arduino-cli version
   echo "Exit status: $status | Expected: $expectedExitStatus"
   [ $status -eq $expectedExitStatus ]
@@ -28,6 +29,7 @@ source ../compilation-test.sh
   run installBoards 'arduino:samd'
   echo "Exit status: $status | Expected: $expectedExitStatus"
   [ $status -eq $expectedExitStatus ]
+  expectedExitStatus=0
   run arduino-cli compile --fqbn arduino:samd:mkrzero ./compilation-test/all-compile/Compiles1
   echo "Exit status: $status | Expected: $expectedExitStatus"
   [ $status -eq $expectedExitStatus ]
@@ -41,6 +43,7 @@ source ../compilation-test.sh
   run installBoards 'MicroCore:avr' 'https://mcudude.github.io/MicroCore/package_MCUdude_MicroCore_index.json'
   echo "Exit status: $status | Expected: $expectedExitStatus"
   [ $status -eq $expectedExitStatus ]
+  expectedExitStatus=0
   run arduino-cli compile --fqbn MicroCore:avr:attiny13 ./compilation-test/all-compile/Compiles1
   echo "Exit status: $status | Expected: $expectedExitStatus"
   [ $status -eq $expectedExitStatus ]
@@ -52,6 +55,7 @@ source ../compilation-test.sh
   run installLibrary "${PWD}/compilation-test/TestLibrary"
   echo "Exit status: $status | Expected: $expectedExitStatus"
   [ $status -eq $expectedExitStatus ]
+  expectedExitStatus=0
   run arduino-cli compile --fqbn arduino:samd:mkrzero "${HOME}/Arduino/libraries/TestLibrary/examples/TestLibraryExample"
   echo "Exit status: $status | Expected: $expectedExitStatus"
   [ $status -eq $expectedExitStatus ]
