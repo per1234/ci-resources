@@ -10,9 +10,9 @@ source ../compilation-test.sh
   [ $status -eq $expectedExitStatus ]
   expectedExitStatus=0
   run arduino-cli version
-  echo "${lines[0]}"
   echo "Exit status: $status | Expected: $expectedExitStatus"
   [ $status -eq $expectedExitStatus ]
+  echo "${lines[0]}"
   outputRegex='^arduino-cli Version: 0\.4\.0$'
   [[ "${lines[0]}" =~ $outputRegex ]]
 }
