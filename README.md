@@ -2,6 +2,13 @@
 
 Shared resources for continuous integration.
 
+**DEPRECATED**
+
+These scripts have now been replaced by [GitHub Actions](https://github.com/features/actions) actions:
+
+- Code formatting check: [`per1234/artistic-style-action`](https://github.com/per1234/artistic-style-action)
+- Sketch compilation check: [`arduino/compile-sketches`](https://github.com/arduino/compile-sketches)
+
 ## check-code-formatting.sh
 This script checks whether code formatting is compliant with the official Arduino code style.
 
